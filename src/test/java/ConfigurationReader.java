@@ -1,5 +1,3 @@
-package utility;
-
 import java.io.*;
 import java.util.Properties;
 
