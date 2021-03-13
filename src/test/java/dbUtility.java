@@ -118,6 +118,7 @@ public class dbUtility {
         try {
             rs.absolute(rowNum);
             result = rs.getString(columnIndex);
+            rs.beforeFirst();
         } catch (SQLException e) {
             System.err.println("!!! ERROR !!! Error while getting column "+columnIndex+" data at row "+rowNum
                     +" "+e.getMessage());
@@ -131,6 +132,7 @@ public class dbUtility {
         try {
             rs.absolute(rowNum);
             result = rs.getString(columnName);
+            rs.beforeFirst();
         } catch (SQLException e) {
             System.err.println("!!! ERROR !!! Error while getting column "+columnName+" data at row "+rowNum
                     +" "+e.getMessage());
