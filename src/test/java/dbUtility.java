@@ -112,17 +112,42 @@ public class dbUtility {
         return rowDataList;
     }
 
+    public static String getColumnDataAtRow (int rowNum, int columnIndex){
+        String result ="";
+
+        try {
+            rs.absolute(rowNum);
+            result = rs.getString(columnIndex);
+        } catch (SQLException e) {
+            System.err.println("!!! ERROR !!! Error while getting column "+columnIndex+" data at row "+rowNum
+                    +" "+e.getMessage());
+        }
+        return result;
+    }
+
+    public static String getColumnDataAtRow(int rowNum, String columnName){
+        String result ="";
+
+        try {
+            rs.absolute(rowNum);
+            result = rs.getString(columnName);
+        } catch (SQLException e) {
+            System.err.println("!!! ERROR !!! Error while getting column "+columnName+" data at row "+rowNum
+                    +" "+e.getMessage());
+        }
+        return result;
+    }
+
+
 
     public static void main(String[] args) throws SQLException {
         createConnection();
         ResultSet myresult = runQuery("SELECT * FROM REGIONS");
         myresult.next();
         System.out.println(myresult.getString(1));
+        System.out.println("3rd row second column is " +getColumnDataAtRow(3, 2));
+        System.out.println("3rd row second column is "+getColumnDataAtRow(2, "region_name"));
 
-        System.out.println(getRowCount());
-        System.out.println(getColumnCount());
-        System.out.println(getColumnNames());
-        System.out.println(getRowDataAsList(3));
       destroy();
     }
 
