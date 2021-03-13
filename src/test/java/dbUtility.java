@@ -140,15 +140,49 @@ public class dbUtility {
         return result;
     }
 
+    public static List<String> getColumnDataAsList (int colIndex){
+        List<String> columnDataASList = new ArrayList<>();
+
+        try{
+            rs.beforeFirst();
+            while (rs.next()){
+                String cellValue = rs.getString(colIndex);
+                columnDataASList.add(cellValue);
+            }
+            rs.beforeFirst();
+
+        }catch (SQLException e){
+            System.err.println("!!! ERROR !!! while getColumnDataAsList "+e.getMessage());
+        }
+        return columnDataASList;
+    }
+
+    public static List<String> getColumnDataAsList (String colName){
+        List<String> columnDataASList = new ArrayList<>();
+
+        try{
+            rs.beforeFirst();
+            while (rs.next()){
+                String cellValue = rs.getString(colName);
+                columnDataASList.add(cellValue);
+            }
+            rs.beforeFirst();
+        }catch (SQLException e){
+            System.err.println("!!! ERROR !!! while getColumnDataAsList "+e.getMessage());
+        }
+        return columnDataASList;
+    }
+
+
 
 
     public static void main(String[] args) throws SQLException {
         createConnection();
         ResultSet myresult = runQuery("SELECT * FROM REGIONS");
         myresult.next();
-        System.out.println(myresult.getString(1));
-        System.out.println("3rd row second column is " +getColumnDataAtRow(3, 2));
-        System.out.println("3rd row second column is "+getColumnDataAtRow(2, "region_name"));
+
+        System.out.println("firs column as list " + getColumnDataAsList("region_id"));
+
 
       destroy();
     }
